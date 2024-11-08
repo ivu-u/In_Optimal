@@ -3,9 +3,19 @@ PRODUCT_NAME       = Project
 # You probably won't need to touch anything below here!!!
 # The one exception is the cleanup stuff.
 
-SOURCES            = $(wildcard *.c)
+SOURCES 		   = $(wildcard *.c)
+
+ARTSOURCES	   	   	= $(wildcard art/*.c)
+HELPERSOURCES	   	= $(wildcard helpers/*.c)
+MENUSCREENSOURCES	= $(wildcard menuScreens/*.c)
+PLAYERSOURCES		= $(wildcard player/*.c)
+PLAYERATTACKSSOURCES		= $(wildcard playerAttacks/*.c)
+BEHAVIORSOURCES	  	= $(wildcard behavior/*.c)
+STATESOURCES	   	= $(wildcard states/*.c)
+
 ASMSOURCES         = $(wildcard *.asm)
 AUDIOSOURCES       = $(wildcard *.wav)
+
 DKPATH             = /opt/devkitpro
 FIND               = find
 COPY               = cp -r
@@ -44,8 +54,17 @@ RM                 = rm -f
 ASMOBJECTS = $(ASMSOURCES:.asm=.o)
 AUDIOOBJECTS = $(AUDIOSOURCES:.wav=.c)
 AUDIOHEADERS = $(AUDIOSOURCES:.wav=.h)
+
+ARTOBJECTS = $(ARTSOURCES:.c=.o)
+HELPEROBJECTS = $(HELPERSOURCES:.c=.o)
+MENUSCREENSOBJECTS = $(MENUSCREENSOURCES:.c=.o)
+PLAYEROBJECTS = $(PLAYERSOURCES:.c=.o)
+PLAYERATTACKSOBJECTS = $(PLAYERATTACKSSOURCES:.c=.o)
+BEHAVIOROBJECTS = $(BEHAVIORSOURCES:.c=.o)
+STATEOBJECTS = $(STATESOURCES:.c=.o)
+
 COBJECTS = $(SOURCES:.c=.o) $(AUDIOSOURCES:.wav=.o)
-OBJECTS = $(COBJECTS) $(ASMOBJECTS)
+OBJECTS = $(COBJECTS) $(ASMOBJECTS) $(HELPEROBJECTS) $(BEHAVIOROBJECTS) $(STATEOBJECTS) $(ARTOBJECTS) $(PLAYEROBJECTS) $(MENUSCREENSOBJECTS) $(PLAYERATTACKSOBJECTS)
 
 
 # --- Main build target
@@ -81,6 +100,7 @@ $(AUDIOHEADERS) : %.h : %.c
 clean:
 	$(RM) $(ROM_NAME) $(ELF_NAME) $(BIN_NAME)
 	$(RM) $(AUDIOOBJECTS) $(AUDIOHEADERS)
-	$(RM) *.o *.i *.s *.sav
+	$(RM) *.sav
+	$(FIND) . -type f \( -name '*.o' -o -name '*.i' -o -name '*.s' \) -delete
 
 audio: $(AUDIOOBJECTS)
