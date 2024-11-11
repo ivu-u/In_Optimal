@@ -71,3 +71,12 @@ void enterState(GameState newState) {
             break;
     }
 }
+
+void resumeState(GameState newState) {
+    switch (newState) {
+    case GS_GAME:
+        resumeGame();
+        state = GS_GAME;
+        break;
+    }
+}

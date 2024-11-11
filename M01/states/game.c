@@ -59,3 +59,9 @@ void win() {
 void drawMap() {
 
 }
+
+void resumeGame() {
+    DMANow(3, &gameBGMap, &SCREENBLOCK[8], gameBGLen / 2);
+    DMANow(3, shadowOAM, OAM, 128 * 4);
+    waitForVBlank();
+}

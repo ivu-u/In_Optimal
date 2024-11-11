@@ -16,6 +16,10 @@ void initPlayer() {
     player.xVel = 1;
     player.yVel = 1;
 
+    // TEMP
+    player.width = 14;
+    player.height = 23;
+
     player.moveType = IDLE;
     player.direction = RIGHT;
 

@@ -68,5 +68,6 @@ void spawnQuickBullet() {
     qb->xVel = 3;
     qb->yVel = 3;
     qb->direction = player.direction;
+    if (qb->direction == RIGHT) { qb->x += player.width; }
     qb->active = 1;
 }

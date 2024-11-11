@@ -1,6 +1,5 @@
 #include "pause.h"
 #include "states.h"
-#include "game.h"
 
 #include "../helpers/gba.h"
 #include "../helpers/mode0.h"
@@ -22,7 +21,7 @@ void updatePause() {
     waitForVBlank();
     DMANow(3, shadowOAM, OAM, 128 * 4);
     if (BUTTON_PRESSED(BUTTON_START)) {
-        enterState(GS_GAME);
+        resumeState(GS_GAME);
     }
 }
 

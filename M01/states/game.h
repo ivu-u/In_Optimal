@@ -11,5 +11,6 @@ void otherInits();
 void updateGame();
 void drawGame();
 
+void resumeGame();
 
 #endif
