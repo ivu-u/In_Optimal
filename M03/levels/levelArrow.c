@@ -15,3 +15,23 @@ void initArrowSprites() {
         //arrow_data[i].oa 
     }
 }
+
+void updateArrows() {
+
+}
+
+void arrowsON() {
+
+}
+
+void arrowsOFF() {
+
+}
+
+void setArrowPos(DIRECTION dir, int x, int y) {
+
+}
+
+void drawArrows() {
+    
+}

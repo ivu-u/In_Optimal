@@ -1,33 +1,37 @@
-# 1 "main.c"
-# 1 "<built-in>"
-# 1 "<command-line>"
-# 1 "main.c"
-# 1 "/opt/devkitpro/devkitARM/arm-none-eabi/include/stdlib.h" 1 3
-# 10 "/opt/devkitpro/devkitARM/arm-none-eabi/include/stdlib.h" 3
-# 1 "/opt/devkitpro/devkitARM/arm-none-eabi/include/machine/ieeefp.h" 1 3
-# 11 "/opt/devkitpro/devkitARM/arm-none-eabi/include/stdlib.h" 2 3
-# 1 "/opt/devkitpro/devkitARM/arm-none-eabi/include/_ansi.h" 1 3
-# 10 "/opt/devkitpro/devkitARM/arm-none-eabi/include/_ansi.h" 3
-# 1 "/opt/devkitpro/devkitARM/arm-none-eabi/include/newlib.h" 1 3
-# 14 "/opt/devkitpro/devkitARM/arm-none-eabi/include/newlib.h" 3
-# 1 "/opt/devkitpro/devkitARM/arm-none-eabi/include/_newlib_version.h" 1 3
-# 15 "/opt/devkitpro/devkitARM/arm-none-eabi/include/newlib.h" 2 3
-# 11 "/opt/devkitpro/devkitARM/arm-none-eabi/include/_ansi.h" 2 3
-# 1 "/opt/devkitpro/devkitARM/arm-none-eabi/include/sys/config.h" 1 3
+#include "playerAnim.h"
+#include "player.h"
+#include "../helpers/sprites.h"
 
+/***********************************************************
+ * Handles all player animation logic. Reads from player.h
+***********************************************************/
 
+// local
+SPRITE playerSprite;
 
-# 1 "/opt/devkitpro/devkitARM/arm-none-eabi/include/machine/ieeefp.h" 1 3
-# 5 "/opt/devkitpro/devkitARM/arm-none-eabi/include/sys/config.h" 2 3
-# 1 "/opt/devkitpro/devkitARM/arm-none-eabi/include/sys/features.h" 1 3
-# 6 "/opt/devkitpro/devkitARM/arm-none-eabi/include/sys/config.h" 2 3
-# 12 "/opt/devkitpro/devkitARM/arm-none-eabi/include/_ansi.h" 2 3
-# 12 "/opt/devkitpro/devkitARM/arm-none-eabi/include/stdlib.h" 2 3
+void initPlayerAnim() {
+    playerSprite.shape = ATTR0_TALL;
+    playerSprite.size = ATTR1_MEDIUM;
 
+    playerSprite.hide = 0;
+    playerSprite.animSpeed = 10;
+    playerSprite.timeUntilNextFrame = playerSprite.animSpeed;
 
+    playerSprite.numFrames = 1;
+    playerSprite.currentFrame = 1;
 
+    playerSprite.isAnimating = 0;
+    playerSprite.hide = 0;  
+    playerSprite.oamIndex = PLAYER_OAM;
+}
 
-# 1 "/opt/devkitpro/devkitARM/lib/gcc/arm-none-eabi/9.1.0/include/stddef.h" 1 3 4
-# 209 "/opt/devkitpro/devkitARM/lib/gcc/arm-none-eabi/9.1.0/include/stddef.h" 3 4
+// temp
+void drawPlayer() {
+    shadowOAM[playerSprite.oamIndex].attr0 = ATTR0_Y(player.y - vOff) | ATTR0_4BPP | playerSprite.shape;
+    shadowOAM[playerSprite.oamIndex].attr1 = ATTR1_X(player.x - hOff) | playerSprite.size;
+    shadowOAM[playerSprite.oamIndex].attr2 = ATTR2_PALROW(0) | ATTR2_PRIORITY(0) | ATTR2_TILEID(0, 0);
 
-# 209 "/opt/devkitpro/devki
+    if (player.direction == RIGHT) {
+        shadowOAM[playerSprite.oamIndex].attr1 |= ATTR1_HFLIP;
+    }
+}

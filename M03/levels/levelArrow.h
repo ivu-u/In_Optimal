@@ -13,4 +13,11 @@ typedef struct {
     int size;
 } ARROW_DATA;
 
+void initArrowSprites();
+void updateArrows();
+void arrowsON();
+void arrowsOFF();
+void setArrowPos(DIRECTION dir, int x, int y);
+void drawArrows();
+
 #endif

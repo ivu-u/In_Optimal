@@ -12,4 +12,6 @@ void initLevelManager();
 void runLevel();
 void enterLevel(LEVEL newLevel);
 
+void drawLevelMaps();
+
 #endif
