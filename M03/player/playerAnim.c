@@ -29,7 +29,15 @@ void initPlayerAnim() {
 void drawPlayer() {
     shadowOAM[playerSprite.oamIndex].attr0 = ATTR0_Y(player.y - vOff) | ATTR0_4BPP | playerSprite.shape;
     shadowOAM[playerSprite.oamIndex].attr1 = ATTR1_X(player.x - hOff) | playerSprite.size;
-    shadowOAM[playerSprite.oamIndex].attr2 = ATTR2_PALROW(0) | ATTR2_PRIORITY(0) | ATTR2_TILEID(0, 0);
+    shadowOAM[playerSprite.oamIndex].attr2 = ATTR2_PALROW(0) | ATTR2_PRIORITY(0);
+
+    if (player.direction == UP) {
+        shadowOAM[playerSprite.oamIndex].attr2 = ATTR2_TILEID(4, 0);
+    } else if (player.direction == DOWN) {
+        shadowOAM[playerSprite.oamIndex].attr2 = ATTR2_TILEID(2, 0);
+    } else {
+        shadowOAM[playerSprite.oamIndex].attr2 = ATTR2_TILEID(0, 0);
+    }
 
     if (player.direction == RIGHT) {
         shadowOAM[playerSprite.oamIndex].attr1 |= ATTR1_HFLIP;
