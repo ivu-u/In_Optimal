@@ -35,6 +35,7 @@
         "pathwaybitmap.h": "c",
         "losebg.h": "c",
         "blackborder.h": "c",
-        "greentest.h": "c"
+        "greentest.h": "c",
+        "heavybullet.h": "c"
     }
 }

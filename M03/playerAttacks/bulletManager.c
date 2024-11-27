@@ -1,5 +1,6 @@
 #include "bulletManager.h"
 #include "quickBullet.h"
+#include "heavyBullet.h"
 
 #include "../player/player.h"
 
@@ -11,6 +12,7 @@ int currNumBulls = 0;
 
 void initBulletManager() {
     initQuickBullets();
+    initHeavyBullets();
 }
 
 void updateBullets() {
@@ -20,7 +22,12 @@ void updateBullets() {
 
         switch (b->bType) {
             case QUICK:
-                updateQuickBullets(b);
+                mgba_printf("quick");
+                updateQuickBullet(b);
+                break;
+            case HEAVY:
+                mgba_printf("heavy");
+                updateHeavyBullet(b);
                 break;
         }
 
@@ -29,17 +36,18 @@ void updateBullets() {
 }
 
 void checkRemoveBullet(BULLET* b) {
-    if (b->x < -10 || b->x > MapWidth + 10) { b->active = 0; }
-    if (b->y < -10 || b->y > MapHeight + 10) { b->active = 0; }
+    if (b->x < -10 || b->x > MapWidth) { b->active = 0; }
+    if (b->y < -10 || b->y > MapHeight) { b->active = 0; }
 }
 
-void spawnBullet() {
+void spawnBullet(int x, int y) {
     switch (player.currAttackType) {
         case QUICK:
-            spawnQuickBullet();
+            spawnQuickBullet(x, y);
             break;
     
         case HEAVY:
+            spawnHeavyBullet(x, y);
             break;
 
         case CHARGE:

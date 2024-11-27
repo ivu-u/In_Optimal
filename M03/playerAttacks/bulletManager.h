@@ -23,6 +23,7 @@ extern BULLET bullets[MAX_BULL_SIZE];
 typedef enum { QUICK, HEAVY, CHARGE } BULLET_TYPE;
 
 #define NUM_QUICK_BULLS 20
+#define NUM_HEAVY_BULLS 10
 
 void initBulletManager();
 void updateBullets();

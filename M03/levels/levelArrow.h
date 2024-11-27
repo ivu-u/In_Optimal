@@ -12,6 +12,9 @@ typedef struct {
     int shape;
     int size;
 
+    // pos for firing bullets
+    int fireX, fireY;
+
     u8 oamIndex;
 } ARROW_DATA;
 
@@ -21,5 +24,6 @@ void arrowsON();
 void arrowsOFF();
 void setArrowPos(DIRECTION dir, int x, int y);
 void drawArrow(ARROW_DATA* a);
+void checkArrowCollision(ARROW_DATA* a);
 
 #endif

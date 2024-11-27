@@ -9,7 +9,7 @@
 #define QB_BASE_DMG 0
 
 void initQuickBullets();
-void updateQuickBullets(BULLET* qb);
+void updateQuickBullet(BULLET* qb);
 void drawQuickBullet(BULLET* qb);
 void moveQuickBullet(BULLET* qb);
 void spawnQuickBullet();

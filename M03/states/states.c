@@ -7,6 +7,7 @@
 #include "win.h"
 #include "instructions.h"
 #include "cutscene.h"
+#include "../helpers/mode0.h"
 
 GameState state;
 
@@ -46,6 +47,9 @@ void runState() {
 void enterState(GameState newState) {
     hOff = 0;
     vOff = 0;
+    REG_BG1HOFF = hOff;
+    REG_BG1VOFF = vOff;
+
     switch (newState) {
         case GS_CUTSCENE:
             initCutscene();

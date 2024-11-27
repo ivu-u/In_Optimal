@@ -84,7 +84,8 @@ typedef enum {UP, DOWN, LEFT, RIGHT} DIRECTION;
 #define PLAYER_OAM 0
 
 // bullets
-#define QB_OAM 12  // 1 - 19
+#define QB_OAM 12 
+#define HB_OAM 28
 
 // gui elements 20 - 30
 #define HEART_OAM 44 // 20 - 22

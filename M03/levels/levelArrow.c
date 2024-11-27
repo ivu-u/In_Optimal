@@ -1,5 +1,7 @@
 #include "levelArrow.h"
 
+#include "../player/player.h"
+
 #include "../helpers/sprites.h"
 
 // externs
@@ -23,6 +25,7 @@ void updateArrows() {
         ARROW_DATA* a = &arrow_data[i];
 
         drawArrow(a);
+        checkArrowCollision(a);
     }
 }
 
@@ -50,4 +53,10 @@ void drawArrow(ARROW_DATA* a) {
     if (a->direction == DOWN) { shadowOAM[a->oamIndex].attr1 |= ATTR1_VFLIP; }
 
     shadowOAM[a->oamIndex].attr2 = ATTR2_TILEID(tileX, tileY);
+}
+
+void checkArrowCollision(ARROW_DATA* a) {
+    if (collision(a->x, a->y, 16, 16, player.x, player.y, player.width, player.height)) {
+        a->overlappingPlayer = 1;
+    } else { a->overlappingPlayer = 0; }
 }

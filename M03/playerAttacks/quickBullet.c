@@ -23,7 +23,7 @@ void initQuickBullets() {
     }
 }
 
-void updateQuickBullets(BULLET* qb) {
+void updateQuickBullet(BULLET* qb) {
     drawQuickBullet(qb);
     moveQuickBullet(qb);
 }
@@ -54,20 +54,25 @@ void moveQuickBullet(BULLET* qb) {
     }
 }
 
-void spawnQuickBullet() {
-    BULLET* qb;
-
-    for (int i = qb_index; i < qb_index + NUM_QUICK_BULLS; ++i) {
-        qb = &bullets[i];
+/// @brief spawns 3 bullets in quick succession
+void spawnQuickBullet(int x, int y) {
+    int bulletsSpawned = 0;
+    for (int i = qb_index; i < qb_index + NUM_QUICK_BULLS && bulletsSpawned < 3; ++i) {
+        BULLET* qb = &bullets[i];
         if (qb->active) { continue; }
-        break;
+        
+        qb->direction = player.direction;
+        qb->x = x;
+        qb->y = y;
+        if (qb->direction == UP) { qb->y += (-QB_HEIGHT) - bulletsSpawned * 5; }
+        else if (qb->direction == DOWN) { qb->y += (QB_HEIGHT) + bulletsSpawned * 5; }
+        else if (qb->direction == LEFT) { qb->x += (-QB_WIDTH) - bulletsSpawned * 5; }
+        else if (qb->direction == RIGHT) { qb->x += (QB_WIDTH) + bulletsSpawned * 5; }
+        
+        qb->xVel = 3;
+        qb->yVel = 3;
+        qb->active = 1;
+
+        bulletsSpawned++;
     }
-    
-    qb->x = player.x;
-    qb->y = player.y;
-    qb->xVel = 3;
-    qb->yVel = 3;
-    qb->direction = player.direction;
-    if (qb->direction == RIGHT) { qb->x += player.width; }
-    qb->active = 1;
 }
