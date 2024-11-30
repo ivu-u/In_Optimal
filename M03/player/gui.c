@@ -15,7 +15,7 @@ void initGui() {
     gui.heartOamIndex = HEART_OAM;
 
     for (int i = 0; i < player.health; ++i) {
-        heartOams[i] = gui.heartOamIndex + (i + 1);
+        heartOams[i] = gui.heartOamIndex + i;
     }
 }
 
@@ -28,7 +28,7 @@ void drawGui() {
         shadowOAM[heartOams[i]].attr0 = ATTR0_Y(baseY) | ATTR0_4BPP | ATTR0_SQUARE;
         shadowOAM[heartOams[i]].attr1 = ATTR1_X(xPos) | ATTR1_SMALL;
 
-        if (i <= player.health - 1) { shadowOAM[heartOams[i]].attr2 = ATTR2_PALROW(0) | ATTR2_PRIORITY(0) | ATTR2_TILEID(0, 4); }
-        else { shadowOAM[heartOams[i]].attr2 = ATTR2_PALROW(0) | ATTR2_PRIORITY(0) | ATTR2_TILEID(2, 4); }
+        if (i <= player.health - 1) { shadowOAM[heartOams[i]].attr2 = ATTR2_PALROW(0) | ATTR2_PRIORITY(0) | ATTR2_TILEID(0, 30); }
+        else { shadowOAM[heartOams[i]].attr2 = ATTR2_PALROW(0) | ATTR2_PRIORITY(0) | ATTR2_TILEID(2, 30); }
     }
 }

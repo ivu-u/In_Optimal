@@ -85,4 +85,5 @@ void checkBallerCollision(ENEMY_DATA* e) {
 void eraseBaller(ENEMY_DATA* e) {
     e->active = 0;
     shadowOAM[e->oamIndex].attr0 = ATTR0_HIDE;
+    enemyKilled();
 }

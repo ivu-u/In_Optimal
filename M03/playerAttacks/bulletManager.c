@@ -1,6 +1,7 @@
 #include "bulletManager.h"
 #include "quickBullet.h"
 #include "heavyBullet.h"
+#include "chargeBullet.h"
 
 #include "../player/player.h"
 
@@ -13,6 +14,7 @@ int currNumBulls = 0;
 void initBulletManager() {
     initQuickBullets();
     initHeavyBullets();
+    initChargeBullets();
 }
 
 void updateBullets() {
@@ -22,15 +24,15 @@ void updateBullets() {
 
         switch (b->bType) {
             case QUICK:
-                mgba_printf("quick");
                 updateQuickBullet(b);
                 break;
             case HEAVY:
-                mgba_printf("heavy");
                 updateHeavyBullet(b);
                 break;
+            case CHARGE:
+                updateChargeBullet(b);
+                break;
         }
-
         checkRemoveBullet(b);
     }
 }
@@ -51,6 +53,7 @@ void spawnBullet(int x, int y) {
             break;
 
         case CHARGE:
+            spawnChargeBullet(x, y);
             break;
     }
 }

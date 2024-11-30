@@ -117,4 +117,6 @@ void drawMovingBG() {
     REG_BG0VOFF = vOff_scroll;
 }
 
-void gameOver() { }
+void gameOver() {
+    enterState(GS_LOSE);
+}

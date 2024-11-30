@@ -1,4 +1,5 @@
 #include "levelArrow.h"
+#include "levelManager.h"
 
 #include "../player/player.h"
 
@@ -31,10 +32,16 @@ void updateArrows() {
 
 void arrowsON() { arrowsActive = 1; }
 
-void arrowsOFF() { arrowsActive = 0; }
+void arrowsOFF() { 
+    arrowsActive = 0; 
+    for (int i = 0; i < 4; ++i) {
+        shadowOAM[arrow_data[i].oamIndex].attr0 |= ATTR0_HIDE;
+    }
+}
 
-void setArrowPos(DIRECTION dir, int x, int y) {
+void setArrowPos(DIRECTION dir, ROOMS room, int x, int y) {
     arrow_data[dir].direction = dir;
+    arrow_data[dir].room = room;
     arrow_data[dir].x = x;
     arrow_data[dir].y = y;
 }
@@ -58,5 +65,16 @@ void drawArrow(ARROW_DATA* a) {
 void checkArrowCollision(ARROW_DATA* a) {
     if (collision(a->x, a->y, 16, 16, player.x, player.y, player.width, player.height)) {
         a->overlappingPlayer = 1;
+        if (BUTTON_PRESSED(BUTTON_B)) {
+            mgba_printf("pressed A on arrow");
+            useArrow(a->room);
+        }
     } else { a->overlappingPlayer = 0; }
+}
+
+/// @brief when the player uses a level arrow, send them to the next room
+void useArrow(ROOMS room) {
+    currRoom = room;
+    // maybe code here for room transitions
+    enterRoom(room);
 }

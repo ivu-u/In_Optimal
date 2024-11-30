@@ -86,12 +86,14 @@ typedef enum {UP, DOWN, LEFT, RIGHT} DIRECTION;
 // bullets
 #define QB_OAM 12 
 #define HB_OAM 28
+#define CB_OAM 38
 
 // gui elements 20 - 30
 #define HEART_OAM 44 // 20 - 22
 #define LEVEL_ARROW_OAM 47 // 23 - 24
 
 // enemies //
-#define BALLER_OAM 51 // 31 - 40
+#define BALLER_OAM 51
+#define STALKER_OAM 59
     
 #endif
