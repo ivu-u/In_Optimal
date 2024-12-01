@@ -3,5 +3,6 @@
 
 void initPlayerAnim();
 void drawPlayer();
+void calculateFrames();
 
 #endif
