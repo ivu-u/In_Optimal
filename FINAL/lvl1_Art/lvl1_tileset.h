@@ -1,28 +1,28 @@
 
-//{{BLOCK(spritesheet)
+//{{BLOCK(lvl1_tileset)
 
 //======================================================================
 //
-//	spritesheet, 256x256@4, 
+//	lvl1_tileset, 256x256@4, 
 //	+ palette 256 entries, not compressed
 //	+ 1024 tiles not compressed
 //	Total size: 512 + 32768 = 33280
 //
-//	Time-stamp: 2024-12-01, 18:16:57
+//	Time-stamp: 2024-11-21, 02:29:21
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.3
 //	( http://www.coranac.com/projects/#grit )
 //
 //======================================================================
 
-#ifndef GRIT_SPRITESHEET_H
-#define GRIT_SPRITESHEET_H
+#ifndef GRIT_LVL1_TILESET_H
+#define GRIT_LVL1_TILESET_H
 
-#define spritesheetTilesLen 32768
-extern const unsigned short spritesheetTiles[16384];
+#define lvl1_tilesetTilesLen 32768
+extern const unsigned short lvl1_tilesetTiles[16384];
 
-#define spritesheetPalLen 512
-extern const unsigned short spritesheetPal[256];
+#define lvl1_tilesetPalLen 512
+extern const unsigned short lvl1_tilesetPal[256];
 
-#endif // GRIT_SPRITESHEET_H
+#endif // GRIT_LVL1_TILESET_H
 
-//}}BLOCK(spritesheet)
+//}}BLOCK(lvl1_tileset)
