@@ -91,13 +91,13 @@ void init_lvl1_room1() {
     setArrowPos(UP, ROOM2, 120, 0);
 
     // initialize enemies (number, type, position)
-    enemy_manager.numBallers = 0;
-    enemy_manager.numStalkers = 4;
-    initEnemies();
-    m_setStalkerPos(40, 0);
-    m_setStalkerPos(144, 144);
-    m_setStalkerPos(10, 10);
-    m_setStalkerPos(100, 100);
+    // enemy_manager.numBallers = 0;
+    // enemy_manager.numStalkers = 4;
+    // initEnemies();
+    // m_setStalkerPos(40, 0);
+    // m_setStalkerPos(144, 144);
+    // m_setStalkerPos(10, 10);
+    // m_setStalkerPos(100, 100);
 }
 
 void draw_lvl1_room1() { DMANow(3, greenTestMap ,&SCREENBLOCK[17], greenTestLen / 2); }

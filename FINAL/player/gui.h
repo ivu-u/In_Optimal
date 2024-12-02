@@ -5,11 +5,12 @@
 
 typedef struct {
     int x, y;
-    int score;
-    u8 heartOamIndex;
 } GUI;
 
 void initGui();
 void drawGui();
+
+void drawHealth();
+void drawAttackType();
 
 #endif

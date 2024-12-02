@@ -21,8 +21,7 @@ void initPlayer() {
     playerSwitchDirections(LEFT);
 
     // for now i'll manually set this
-    //playerGetRandomSkill();
-    player.currAttackType = HEAVY;
+    playerGetRandomSkill();
 
     player.health = MAX_PLAYER_HEALTH;
 
@@ -78,10 +77,9 @@ void playerMovement() {
 
 void playerSkills() {
     // can only cast after cooldown is over
-    //if (player.skillCooldown > 0) { player.skillCooldown -= 1; return; }
+    if (player.skillCooldown > 0) { player.skillCooldown -= 1; return; }
 
     if (BUTTON_PRESSED(BUTTON_A)) {
-        mgba_printf("A");
         spawnBullet(player.fireX, player.fireY);
         playerResetSkillTime(player.currAttackType);
     }
@@ -97,7 +95,7 @@ void playerTakeDamage(int dmg) {
 }
 
 void playerGetRandomSkill() {
-    int val = rand() % (2 - 0 + 1) + 0;
+    int val = rand() % 3;
 
     if (val == 0) { 
         player.currAttackType = QUICK; 

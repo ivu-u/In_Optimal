@@ -21,7 +21,8 @@ typedef struct {
     int currAttackType;
 } PLAYER;
 
-#define MAX_PLAYER_HEALTH 10
+#define MAX_PLAYER_HEALTH 3
+#define SWITCH_SKILL_TIME 2 * 60    // X seconds * 60
 
 extern PLAYER player;
 typedef enum {IDLE } MOVE_TYPE;

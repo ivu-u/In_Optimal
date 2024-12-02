@@ -8,7 +8,7 @@
 
 // local
 SPRITE playerSprite;
-int numWalkSideFrames = 1;
+int numWalkSideFrames = 4;
 int numWalkDownFrames = 4;
 int numWalkUpFrames = 2;
 
