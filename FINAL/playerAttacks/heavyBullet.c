@@ -17,6 +17,7 @@ void initHeavyBullets() {
         b->height = HB_HEIGHT;
         b->width = HB_WIDTH;
         b->dmg = HB_BASE_DMG;
+        b->distanceMoved = 0;
 
         b->oamIndex = HB_OAM + i;
         currNumBulls++;
@@ -31,7 +32,7 @@ void updateHeavyBullet(BULLET* hb) {
 void drawHeavyBullet(BULLET* hb) {
     shadowOAM[hb->oamIndex].attr0 = ATTR0_Y(hb->y - vOff) | ATTR0_4BPP | ATTR0_SQUARE;
     shadowOAM[hb->oamIndex].attr1 = ATTR1_X(hb->x - hOff) | ATTR1_TINY;
-    shadowOAM[hb->oamIndex].attr2 = ATTR2_PALROW(0) | ATTR2_PRIORITY(0) | ATTR2_TILEID(1, 9);
+    shadowOAM[hb->oamIndex].attr2 = ATTR2_PALROW(BULL_PALROW) | ATTR2_PRIORITY(0) | ATTR2_TILEID(1, 12);
 }
 
 void moveHeavyBullet(BULLET* hb) {
@@ -52,6 +53,8 @@ void moveHeavyBullet(BULLET* hb) {
             hb->x += hb->xVel;
             break;
     }
+    hb->distanceMoved++;
+    if (hb->distanceMoved >= HB_MAX_DISTANCE) { HB_Despawn(hb); }
 }
 
 /// @brief heavy recoil shot
@@ -60,7 +63,6 @@ void spawnHeavyBullet(int x, int y) {
     for (int i = hb_index; i < hb_index + NUM_HEAVY_BULLS; ++i) {
         hb = &bullets[i];
         if (hb->active) { continue; }
-
         break;
     }
 
@@ -72,7 +74,13 @@ void spawnHeavyBullet(int x, int y) {
     else if (hb->direction == LEFT) { hb->x += (-HB_WIDTH); }
     else if (hb->direction == RIGHT) { hb->x += (HB_WIDTH); }
 
-    hb->xVel = 2;
-    hb->yVel = 2;
+    hb->xVel = 3;
+    hb->yVel = 3;
+    hb->distanceMoved = 0;
     hb->active = 1;
+}
+
+void HB_Despawn(BULLET* hb) {
+    hb->active = 0;
+    shadowOAM[hb->oamIndex].attr0 = ATTR0_HIDE;
 }

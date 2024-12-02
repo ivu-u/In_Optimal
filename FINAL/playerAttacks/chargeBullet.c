@@ -32,7 +32,7 @@ void updateChargeBullet(BULLET* cb) {
 void drawChargeBullet(BULLET* cb) {
     shadowOAM[cb->oamIndex].attr0 = ATTR0_Y(cb->y - vOff) | ATTR0_4BPP | ATTR0_SQUARE;
     shadowOAM[cb->oamIndex].attr1 = ATTR1_X(cb->x - hOff) | ATTR1_MEDIUM;
-    shadowOAM[cb->oamIndex].attr2 = ATTR2_PALROW(0) | ATTR2_PRIORITY(0) | ATTR2_TILEID(0, 12);
+    shadowOAM[cb->oamIndex].attr2 = ATTR2_PALROW(BULL_PALROW) | ATTR2_PRIORITY(0) | ATTR2_TILEID(3, 12);
 }
 
 void moveChargeBullet(BULLET* cb) {

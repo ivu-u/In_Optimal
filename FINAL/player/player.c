@@ -4,6 +4,7 @@
 #include "../playerAttacks/bulletManager.h"
 
 #include "../helpers/sprites.h"
+#include "../helpers/mode0.h"
 
 #include "../states/game.h"
 
@@ -21,9 +22,16 @@ void initPlayer() {
     playerSwitchDirections(LEFT);
 
     // for now i'll manually set this
-    playerGetRandomSkill();
+    //playerGetRandomSkill();
+    player.currAttackType = HEAVY;
+    player.skillSwitchCooldown = SWITCH_SKILL_TIME;
 
     player.health = MAX_PLAYER_HEALTH;
+    player.iFrames = 0;
+
+    player.isDashing = 0;
+    player.dashTimer = 0;
+    player.dashCooldownTimer = 0;
 
     initPlayerAnim();
     initBulletManager();
@@ -31,6 +39,7 @@ void initPlayer() {
 
 void updatePlayer() {
     playerMovement();
+    if (player.isInvulnerable) { playerCalculateIFrames(); }
     playerSkills();
     drawPlayer();
     updateBullets();
@@ -48,6 +57,29 @@ void playerMovement() {
     int leftX = player.x;
     int topY = player.y;
     int botY = player.y + player.height - 1;
+
+    if (player.dashCooldownTimer > 0) { player.dashCooldownTimer--; }
+
+    // dashing feat. chatGPT
+    if (player.isDashing) {
+        // Update player position
+        player.x += player.xVel;
+        player.y += player.yVel;
+
+        player.dashTimer--; // decr dash timer
+        if (player.dashTimer <= 0) { player.isDashing = 0; }
+    } else {
+        // Smooth deceleration if dash ended
+        if (player.xVel > 1 || player.yVel > 1) {
+            player.xVel *= 0.9;  // Smoothly reduce speed
+            player.yVel *= 0.9;
+        } else {
+            player.xVel = 1;  // Return to normal speed
+            player.yVel = 1;
+        }
+    }
+
+    if (player.isDashing) return;
 
     if (BUTTON_HELD(BUTTON_LEFT) && player.x > 0) {
         playerSwitchDirections(LEFT);
@@ -76,22 +108,68 @@ void playerMovement() {
 }
 
 void playerSkills() {
+    // dash
+    if (BUTTON_PRESSED(BUTTON_B) && player.dashCooldownTimer <= 0) { playerDash(); }
+
     // can only cast after cooldown is over
     if (player.skillCooldown > 0) { player.skillCooldown -= 1; return; }
 
     if (BUTTON_PRESSED(BUTTON_A)) {
+        mgba_printf("pew");
         spawnBullet(player.fireX, player.fireY);
         playerResetSkillTime(player.currAttackType);
     }
+
+    // random skill after X seconds
+    // if (player.skillSwitchCooldown > 0) { player.skillSwitchCooldown -= 1; return; }
+    // playerGetRandomSkill();
+}
+
+void playerDash() {
+    if (player.dashCooldownTimer > 0) { return; }
+
+    player.isDashing = 1;
+    player.dashTimer = P_DASH_DURATION;
+    player.dashCooldownTimer =P_DASH_COOLDOWN;
+
+    switch (player.direction) {
+        case UP:
+            player.xVel = 0;
+            player.yVel = -P_DASH_SPEED;
+            break;
+        
+        case DOWN:
+            player.xVel = 0;
+            player.yVel = P_DASH_SPEED;
+            break;
+        
+        case LEFT:
+            player.xVel = -P_DASH_SPEED;
+            player.yVel = 0;
+            break;
+        
+        case RIGHT:
+            player.xVel = P_DASH_SPEED;
+            player.yVel = 0;
+            break;
+    }
+
+    // // screen shake
+    // REG_BG1HOFF = rand() % 100 - 1;
+    // REG_BG1VOFF = rand() % 100 - 1; 
 }
 
 void playerTakeDamage(int dmg) {
+    if (player.isInvulnerable) { return; }
     player.health -= dmg;
+    playerMakeInvulnerable();
 
-    if (player.health <= 0) {
-        // game over
-        gameOver();
-    }
+    // game over
+    if (player.health <= 0) { gameOver(); }
+}
+
+void playerApplyRecoil(int direction, int recoilForce) {
+    
 }
 
 void playerGetRandomSkill() {
@@ -107,6 +185,9 @@ void playerGetRandomSkill() {
         player.currAttackType = CHARGE; 
         playerResetSkillTime(CHARGE);
     }
+
+    // reset timer
+    player.skillSwitchCooldown = SWITCH_SKILL_TIME;
 }
 
 void playerSwitchDirections(DIRECTION dir) {
@@ -140,14 +221,24 @@ void playerSwitchDirections(DIRECTION dir) {
 void playerResetSkillTime(BULLET_TYPE type) {
     switch(type) {
         case QUICK:
-            player.skillCooldown = 1;
+            player.skillCooldown = .4;
             break;
         case HEAVY:
-            player.skillCooldown = 1;
+            player.skillCooldown = .6;
             break;
         case CHARGE:
-            player.skillCooldown = 1;
+            player.skillCooldown = 0;
             break;
     }
     player.skillCooldown *= 60;
+}
+
+void playerCalculateIFrames() {
+    if (player.iFrames > 0) { player.iFrames--; return; }
+    player.isInvulnerable = 0;
+}
+
+void playerMakeInvulnerable() {
+    player.isInvulnerable = 1;
+    player.iFrames = IFRAME_AMOUNT;
 }

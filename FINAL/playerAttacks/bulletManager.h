@@ -13,6 +13,9 @@ typedef struct {
     int oamIndex;
 
     int dmg;
+
+    // bullet specific stuff
+    int distanceMoved;
 } BULLET;
 
 #define MAX_BULL_SIZE 50
@@ -25,6 +28,8 @@ typedef enum { QUICK, HEAVY, CHARGE } BULLET_TYPE;
 #define NUM_QUICK_BULLS 20
 #define NUM_HEAVY_BULLS 10
 #define NUM_CHARGE_BULLS 6
+
+#define BULL_PALROW 3
 
 void initBulletManager();
 void updateBullets();

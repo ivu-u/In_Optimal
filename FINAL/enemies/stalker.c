@@ -60,7 +60,7 @@ void updateStalkers() {
 void drawStalker(ENEMY_DATA* e) {
     shadowOAM[e->oamIndex].attr0 = ATTR0_Y(e->y - vOff) | ATTR0_4BPP | ATTR0_SQUARE;
     shadowOAM[e->oamIndex].attr1 = ATTR1_X(e->x - hOff) | ATTR1_SMALL;
-    shadowOAM[e->oamIndex].attr2 = ATTR2_PALROW(1) | ATTR2_PRIORITY(0) | ATTR2_TILEID(2, 11);
+    shadowOAM[e->oamIndex].attr2 = ATTR2_PALROW(0) | ATTR2_PRIORITY(0) | ATTR2_TILEID(2, 15);
 }
 
 /// @brief Moves the stalker enemy toward the player's position
@@ -99,7 +99,6 @@ void setStalkerPos(int x, int y) {
 void checkStalkerCollision(ENEMY_DATA* e) {
     if (collision(e->x, e->y, STALKER_WIDTH, STALKER_HEIGHT, player.x, player.y, player.width, player.height)) {
         playerTakeDamage(1);
-        eraseStalker(e);
     }
 
     for (int i = 0; i < MAX_BULL_SIZE; ++i) {

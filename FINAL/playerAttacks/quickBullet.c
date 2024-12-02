@@ -31,7 +31,7 @@ void updateQuickBullet(BULLET* qb) {
 void drawQuickBullet(BULLET* qb) {
     shadowOAM[qb->oamIndex].attr0 = ATTR0_Y(qb->y - vOff) | ATTR0_4BPP | ATTR0_SQUARE;
     shadowOAM[qb->oamIndex].attr1 = ATTR1_X(qb->x - hOff) | ATTR1_TINY;
-    shadowOAM[qb->oamIndex].attr2 = ATTR2_PALROW(0) | ATTR2_PRIORITY(0) | ATTR2_TILEID(0, 9);
+    shadowOAM[qb->oamIndex].attr2 = ATTR2_PALROW(BULL_PALROW) | ATTR2_PRIORITY(0) | ATTR2_TILEID(0, 12);
 }
 
 void moveQuickBullet(BULLET* qb) {

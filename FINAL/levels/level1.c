@@ -92,7 +92,7 @@ void init_lvl1_room1() {
 
     // initialize enemies (number, type, position)
     // enemy_manager.numBallers = 0;
-    // enemy_manager.numStalkers = 4;
+    // enemy_manager.numStalkers = 1;
     // initEnemies();
     // m_setStalkerPos(40, 0);
     // m_setStalkerPos(144, 144);
