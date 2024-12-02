@@ -25,6 +25,7 @@ typedef struct {
     int dashTimer;
     int dashCooldownTimer;
     int isRecoiling;
+    int recoilTimer;
 
     int currAttackType;
 } PLAYER;
@@ -49,6 +50,7 @@ void playerMovement();
 void playerSkills();
 void playerDash();
 void playerTakeDamage(int dmg);
+void playerApplyRecoil(int direction, int recoilForce);
 
 void playerGetRandomSkill();
 void playerSwitchDirections(DIRECTION dir);

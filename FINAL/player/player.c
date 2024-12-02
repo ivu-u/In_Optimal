@@ -60,7 +60,25 @@ void playerMovement() {
 
     if (player.dashCooldownTimer > 0) { player.dashCooldownTimer--; }
 
-    // dashing feat. chatGPT
+    //  RECOIL ---
+    if (player.isRecoiling) {
+        player.x += player.xVel;
+        player.y += player.yVel;
+
+        player.xVel *= 0.9;
+        player.yVel *= 0.9;
+
+        // Decrease recoil timer and reset when done
+        player.recoilTimer--;
+        if (player.recoilTimer <= 0) {
+            player.isRecoiling = 0;
+            player.xVel = 1;
+            player.yVel = 1;
+        }
+        return;
+    }
+
+    // DASHING feat. chatGPT ---
     if (player.isDashing) {
         // Update player position
         player.x += player.xVel;
@@ -81,6 +99,7 @@ void playerMovement() {
 
     if (player.isDashing) return;
 
+    // WALKING ---
     if (BUTTON_HELD(BUTTON_LEFT) && player.x > 0) {
         playerSwitchDirections(LEFT);
         if (colorAt(leftX - player.xVel, topY) && colorAt(leftX - player.xVel, botY)) {
@@ -169,8 +188,33 @@ void playerTakeDamage(int dmg) {
 }
 
 void playerApplyRecoil(int direction, int recoilForce) {
-    
+    switch (direction) {
+        case UP:
+            player.yVel = recoilForce;
+            player.xVel = 0;
+            break;
+
+        case DOWN:
+            player.yVel = -recoilForce;
+            player.xVel = 0;
+            break;
+
+        case LEFT:
+            player.xVel = recoilForce;
+            player.yVel = 0;
+            break;
+
+        case RIGHT:
+            player.xVel = -recoilForce;
+            player.yVel = 0;
+            break;
+    }
+
+    player.isRecoiling = 1;
+    player.recoilTimer = 12;  // Frames of recoil
 }
+
+// -----------
 
 void playerGetRandomSkill() {
     int val = rand() % 3;

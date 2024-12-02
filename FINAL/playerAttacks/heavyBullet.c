@@ -78,6 +78,8 @@ void spawnHeavyBullet(int x, int y) {
     hb->yVel = 3;
     hb->distanceMoved = 0;
     hb->active = 1;
+
+    playerApplyRecoil(hb->direction, 5);
 }
 
 void HB_Despawn(BULLET* hb) {

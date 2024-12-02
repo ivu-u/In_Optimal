@@ -8,7 +8,7 @@
 
 #define HB_BASE_DMG 0
 
-#define HB_MAX_DISTANCE 30
+#define HB_MAX_DISTANCE 20
 
 void initHeavyBullets();
 void updateHeavyBullet(BULLET* hb);
