@@ -82,22 +82,23 @@ typedef enum {UP, DOWN, LEFT, RIGHT} DIRECTION;
 
 // OAM INDEXES
 #define PLAYER_OAM 0
+#define PLAYER_TRAIL_OAM 1
 
 // GUI
-#define HEART_OAM 1
-#define LEVEL_ARROW_OAM 4
-#define B_TYPE_BOX_OAM 8
-#define B_TYPE_OAM 9
-#define BULL_TIMER_OAM 10
+#define HEART_OAM 6
+#define LEVEL_ARROW_OAM 9
+#define B_TYPE_BOX_OAM 13
+#define B_TYPE_OAM 14
+#define BULL_TIMER_OAM 15
 
 
 // BULLETS
-#define QB_OAM 14
-#define HB_OAM 30
-#define CB_OAM 40
+#define QB_OAM 19
+#define HB_OAM 35
+#define CB_OAM 45
 
 // ENEMIES
-#define BALLER_OAM 46
-#define STALKER_OAM 54
+#define BALLER_OAM 51
+#define STALKER_OAM 59
     
 #endif

@@ -80,6 +80,8 @@ void playerMovement() {
 
     // DASHING feat. chatGPT ---
     if (player.isDashing) {
+        trailEffectLogic();
+
         // Update player position
         player.x += player.xVel;
         player.y += player.yVel;
