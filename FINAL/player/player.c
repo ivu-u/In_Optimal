@@ -23,7 +23,7 @@ void initPlayer() {
 
     // for now i'll manually set this
     //playerGetRandomSkill();
-    player.currAttackType = HEAVY;
+    player.currAttackType = CHARGE;
     player.skillSwitchCooldown = SWITCH_SKILL_TIME;
 
     player.health = MAX_PLAYER_HEALTH;
@@ -102,25 +102,25 @@ void playerMovement() {
     if (player.isDashing) return;
 
     // WALKING ---
-    if (BUTTON_HELD(BUTTON_LEFT) && player.x > 0) {
+    if (BUTTON_HELD(BUTTON_LEFT) && player.x ) {
         playerSwitchDirections(LEFT);
         if (colorAt(leftX - player.xVel, topY) && colorAt(leftX - player.xVel, botY)) {
             player.x -= player.xVel;
         }
     }
-    if (BUTTON_HELD(BUTTON_RIGHT) && player.x + player.width - 1 < MapWidth) {
+    if (BUTTON_HELD(BUTTON_RIGHT) && player.x) {
         playerSwitchDirections(RIGHT);
         if (colorAt(rightX + player.xVel, topY) && colorAt(rightX + player.xVel, botY)) {
             player.x += player.xVel;
         }
     }
-    if (BUTTON_HELD(BUTTON_UP) && player.y > 0) {
+    if (BUTTON_HELD(BUTTON_UP) && player.y) {
         playerSwitchDirections(UP);
         if (colorAt(leftX, topY - player.yVel) && colorAt(rightX , topY - player.yVel)) {
             player.y -= player.yVel;
         }
     }
-    if (BUTTON_HELD(BUTTON_DOWN) && player.y + player.height - 1 < MapHeight) {
+    if (BUTTON_HELD(BUTTON_DOWN) && player.y) {
         playerSwitchDirections(DOWN);
         if (colorAt(leftX, botY + player.yVel) && colorAt(rightX, botY + player.yVel)) {
             player.y += player.yVel;
@@ -175,9 +175,8 @@ void playerDash() {
             break;
     }
 
-    // // screen shake
-    // REG_BG1HOFF = rand() % 100 - 1;
-    // REG_BG1VOFF = rand() % 100 - 1; 
+    // screen shake
+    triggerScreenshake(10, 2);
 }
 
 void playerTakeDamage(int dmg) {

@@ -54,7 +54,7 @@ void moveChargeBullet(BULLET* cb) {
 
 /// @brief Spawns a single powerful sniper bullet after charging.
 void spawnChargeBullet(int x, int y) {
-    if (currCharge <= 2 * 60) { return; }
+    if (currCharge <= 1.5 * 60) { return; }
     // overcharge == more damage(?)
     currCharge = 0;
 
@@ -81,5 +81,6 @@ void spawnChargeBullet(int x, int y) {
 }
 
 void chargeBullet() {
+    mgba_printf("charge");
     currCharge += 1;
 }

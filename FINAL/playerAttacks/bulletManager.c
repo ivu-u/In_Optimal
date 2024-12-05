@@ -18,6 +18,9 @@ void initBulletManager() {
 }
 
 void updateBullets() {
+    // don't know if this should be here but .-.
+    if (player.currAttackType == CHARGE && BUTTON_HELD(BUTTON_A)) { chargeBullet(); }
+
     for (int i = 0; i < MAX_BULL_SIZE; ++i) {
         BULLET* b = &bullets[i];
         if (!(b->active)) { continue; }

@@ -20,7 +20,8 @@ extern int MapWidth, MapHeight;
 
 // TO-DO: make this scalable with levels
 inline unsigned char colorAt(int x, int y){
-    return ((unsigned char *) pathwayBitmapBitmap)[OFFSET(x, y, MapWidth)];
+    //return ((unsigned char *) pathwayBitmapBitmap)[OFFSET(x, y, MapWidth)];
+    return 1;
 }
 
 #endif
