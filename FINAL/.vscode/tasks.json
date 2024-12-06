@@ -6,7 +6,7 @@
         {
             "label": "build run",
             "type": "shell",
-            "command": "E:/College/Fall2024/CS_2261/FinalProject/In_Optimal/mGBA.exe ./Project.gba",
+            "command": "H:/College/Fall2024/CS_2261/FinalProject/In_Optimal/mGBA.exe ./Project.gba",
             // add the mGBA.app exact path to the above line,
             // inside the quotes before the space in  " ./Project.gba"!
             "problemMatcher": [],

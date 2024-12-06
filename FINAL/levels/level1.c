@@ -16,6 +16,8 @@
 #include "../lvl1_Art/lvl1_left1.h"
 #include "../lvl1_Art/lvl1_left2.h"
 #include "../lvl1_Art/lvl1_leftBoss.h"
+#include "../lvl1_Art/lvl1_final.h"
+#include "../lvl1_Art/lvl1BckgScroll.h"
 
 // locals
 int roomIsCleared[NUM_ROOMS];
@@ -24,6 +26,12 @@ int spawnY = 232;
 
 /// @brief Runs when you first enter level 1, only once
 void initLevel1() {
+    // scrollingh bckg
+    // DMANow(3, &lvl1BckgScrollTiles, &CHARBLOCK[0], lvl1BckgScrollTilesLen / 2);
+    // DMANow(3, &lvl1BckgScrollMap, &SCREENBLOCK[16], lvl1BckgScrollMapLen / 2);
+
+    setMapDimensions(512, 512);
+
     currRoom = STARTROOM;
     DMANow(3, &lvl1_tilesetTiles, &CHARBLOCK[1], lvl1_tilesetTilesLen / 2);
     DMANow(3, &lvl1_tilesetPal, BG_PALETTE, lvl1_tilesetPalLen / 2);
@@ -53,8 +61,8 @@ void update_lvl1() {
 }
 
 void lvl1_enterROOM(ROOMS room, int x, int y) {
-    int spawnX = x;
-    int spawnY = y;
+    spawnX = x;
+    spawnY = y;
 
     switch(room) {
         case STARTROOM:
@@ -69,7 +77,8 @@ void lvl1_enterROOM(ROOMS room, int x, int y) {
             init_lvl1_leftRoom2();
             break;
         
-        default:
+        case FINAL:
+            init_lvl1_finalRoom();
             break;
     }
 }
@@ -88,19 +97,19 @@ void drawMaps_lvl1() {
             draw_lvl1_leftRoom2();
             break;
         
-        default:
+        case FINAL:
+            draw_lvl1_finalRoom();
             break;
     }
 }
 
 void init_lvl1_startingRoom() {
     arrowsON();
-
     draw_lvl1_startingRoom();
-    setMapDimensions(512, 512);
     setPlayerPos(spawnX, spawnY);
 
     // TEST
+    setArrowPos(UP, FINAL, 243, 114);
     setArrowPos(RIGHT, LEFT1, 385, 235);
 
     // initialize enemies (number, type, position)
@@ -113,7 +122,7 @@ void init_lvl1_startingRoom() {
     // m_setStalkerPos(100, 100);
 }
 
-void draw_lvl1_startingRoom() { DMANow(3, lvl1_startingRoomMap ,&SCREENBLOCK[17], lvl1_startingRoomLen / 2); }
+void draw_lvl1_startingRoom() { DMANow(3, &lvl1_startingRoomMap ,&SCREENBLOCK[17], lvl1_startingRoomLen / 2); }
 
 void update_lvl1_startingRoom() {
     // check if the room has been cleared or not
@@ -128,7 +137,6 @@ void init_lvl1_leftRoom1() {
 
     setArrowPos(UP, LEFT2, 120, 0);
 
-    
 }
 
 void draw_lvl1_leftRoom1() {  }
@@ -162,6 +170,12 @@ void draw_lvl1_leftRoomFinal() {
 void update_lvl1_leftRoomFinal() {
 
 }
+
+void init_lvl1_finalRoom() {
+    draw_lvl1_finalRoom();
+}
+
+void draw_lvl1_finalRoom() { DMANow(3, &lvl1_finalMap ,&SCREENBLOCK[17], lvl1_finalLen / 2);}
 
 void winLevel() { }
  

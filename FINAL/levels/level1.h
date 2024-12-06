@@ -25,6 +25,9 @@ void init_lvl1_leftRoomFinal();
 void draw_lvl1_leftRoomFinal();
 void update_lvl1_leftRoomFinal();
 
+void init_lvl1_finalRoom();
+void draw_lvl1_finalRoom();
+
 void winLevel();
 
 #endif

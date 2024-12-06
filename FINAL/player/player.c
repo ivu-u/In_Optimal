@@ -11,6 +11,12 @@
 // externs
 PLAYER player;
 
+// local
+int rightX = 0;
+int leftX = 0;
+int topY = 0;
+int botY = 0;
+
 void initPlayer() {
     player.xVel = 1;
     player.yVel = 1;
@@ -23,7 +29,7 @@ void initPlayer() {
 
     // for now i'll manually set this
     //playerGetRandomSkill();
-    player.currAttackType = CHARGE;
+    player.currAttackType = HEAVY;
     player.skillSwitchCooldown = SWITCH_SKILL_TIME;
 
     player.health = MAX_PLAYER_HEALTH;
@@ -53,17 +59,27 @@ void setPlayerPos(int x, int y) {
 // -----------
 
 void playerMovement() {
-    int rightX = player.x + player.width - 1;
-    int leftX = player.x;
-    int topY = player.y;
-    int botY = player.y + player.height - 1;
+    rightX = player.x + player.width - 1;
+    leftX = player.x;
+    topY = player.y;
+    botY = player.y + player.height - 1;
 
     if (player.dashCooldownTimer > 0) { player.dashCooldownTimer--; }
 
     //  RECOIL ---
     if (player.isRecoiling) {
-        player.x += player.xVel;
-        player.y += player.yVel;
+        // player.x += player.xVel;
+        // player.y += player.yVel;
+        int newX = player.x + player.xVel;
+        int newY = player.y + player.yVel;
+
+        // Check collision before applying recoil movement
+        if (colorAt(newX, topY) && colorAt(newX, botY)) {
+            player.x = newX;
+        }
+        if (colorAt(leftX, newY) && colorAt(rightX, newY)) {
+            player.y = newY;
+        }
 
         player.xVel *= 0.9;
         player.yVel *= 0.9;
@@ -83,8 +99,19 @@ void playerMovement() {
         trailEffectLogic();
 
         // Update player position
-        player.x += player.xVel;
-        player.y += player.yVel;
+        // player.x += player.xVel;
+        // player.y += player.yVel;
+
+        int newX = player.x + player.xVel;
+        int newY = player.y + player.yVel;
+
+        // Check collision before applying dash movement
+        if (colorAt(newX, topY) && colorAt(newX, botY)) {
+            player.x = newX;
+        }
+        if (colorAt(leftX, newY) && colorAt(rightX, newY)) {
+            player.y = newY;
+        }
 
         player.dashTimer--; // decr dash timer
         if (player.dashTimer <= 0) { player.isDashing = 0; }
@@ -136,7 +163,6 @@ void playerSkills() {
     if (player.skillCooldown > 0) { player.skillCooldown -= 1; return; }
 
     if (BUTTON_PRESSED(BUTTON_A)) {
-        mgba_printf("pew");
         spawnBullet(player.fireX, player.fireY);
         playerResetSkillTime(player.currAttackType);
     }

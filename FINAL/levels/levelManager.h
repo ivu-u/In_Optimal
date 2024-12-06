@@ -12,7 +12,8 @@ typedef enum {
     STARTROOM,
     LEFT1,
     LEFT2,
-    LEFTFINAL
+    LEFTFINAL,
+    FINAL
 } ROOMS;
 
 extern ROOMS currRoom;

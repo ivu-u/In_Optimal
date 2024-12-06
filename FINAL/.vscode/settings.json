@@ -36,6 +36,7 @@
         "losebg.h": "c",
         "blackborder.h": "c",
         "greentest.h": "c",
-        "heavybullet.h": "c"
+        "heavybullet.h": "c",
+        "lvl1_final.h": "c"
     }
 }

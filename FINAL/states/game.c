@@ -86,8 +86,6 @@ void setMapDimensions(int mapWidth, int mapHeight) {
 
 /// @brief DMA the correct tiles/pal/spritesheet
 void drawMaps() {
-    // DMANow(3, &gametilesetPal, BG_PALETTE, gametilesetPalLen / 2);
-    // DMANow(3, &gametilesetTiles, &CHARBLOCK[1], gametilesetTilesLen / 2);
 
     // red bG scroll
     DMANow(3, &redBGTiles, &CHARBLOCK[0], redBGTilesLen / 2);
