@@ -9,10 +9,10 @@ typedef enum {
 extern LEVEL currLevel;
 
 typedef enum {
-    ROOM1,
-    ROOM2,
-    ROOM3,
-    ROOM4
+    STARTROOM,
+    LEFT1,
+    LEFT2,
+    LEFTFINAL
 } ROOMS;
 
 extern ROOMS currRoom;
@@ -20,7 +20,7 @@ extern ROOMS currRoom;
 void initLevelManager();
 void runLevel();
 void enterLevel(LEVEL newLevel);
-void enterRoom(ROOMS room);
+void enterRoom(ROOMS room, int x, int y);
 
 void allEnemiesCleared();
 void drawLevelMaps();

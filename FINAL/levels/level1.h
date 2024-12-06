@@ -3,8 +3,10 @@
 
 #include "levelManager.h"
 
+#define NUM_ROOMS 4
+
 void initLevel1();
-void lvl1_enterROOM(ROOMS room);
+void lvl1_enterROOM(ROOMS room, int x, int y);
 void drawMaps_lvl1();
 
 void init_lvl1_startingRoom();

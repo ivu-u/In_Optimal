@@ -17,25 +17,32 @@
 #include "../lvl1_Art/lvl1_left2.h"
 #include "../lvl1_Art/lvl1_leftBoss.h"
 
+// locals
+int roomIsCleared[NUM_ROOMS];
+int spawnX = 240;   // initial spawn point
+int spawnY = 232;
+
 /// @brief Runs when you first enter level 1, only once
 void initLevel1() {
-    currRoom = ROOM1;
+    currRoom = STARTROOM;
     DMANow(3, &lvl1_tilesetTiles, &CHARBLOCK[1], lvl1_tilesetTilesLen / 2);
     DMANow(3, &lvl1_tilesetPal, BG_PALETTE, lvl1_tilesetPalLen / 2);
     init_lvl1_startingRoom();
+
+    for (int i = 0; i < NUM_ROOMS; ++i) { roomIsCleared[i] = 0; }
 }
 
 void update_lvl1() {
     switch (currRoom) {
-        case ROOM1:
+        case STARTROOM:
             update_lvl1_startingRoom();
             break;
         
-        case ROOM2:
+        case LEFT1:
             update_lvl1_leftRoom1();
             break;
 
-        case ROOM3:
+        case LEFT2:
             update_lvl1_leftRoom2();
             break;
         
@@ -45,17 +52,20 @@ void update_lvl1() {
     }
 }
 
-void lvl1_enterROOM(ROOMS room) {
+void lvl1_enterROOM(ROOMS room, int x, int y) {
+    int spawnX = x;
+    int spawnY = y;
+
     switch(room) {
-        case ROOM1:
+        case STARTROOM:
             init_lvl1_startingRoom();
             break;
 
-        case ROOM2:
+        case LEFT1:
             init_lvl1_leftRoom1();
             break;
 
-        case ROOM3:
+        case LEFT2:
             init_lvl1_leftRoom2();
             break;
         
@@ -66,15 +76,15 @@ void lvl1_enterROOM(ROOMS room) {
 
 void drawMaps_lvl1() {
     switch (currRoom) {
-        case ROOM1:
+        case STARTROOM:
             draw_lvl1_startingRoom();
             break;
 
-        case ROOM2:
+        case LEFT1:
             draw_lvl1_leftRoom1();
             break;
 
-        case ROOM3:
+        case LEFT2:
             draw_lvl1_leftRoom2();
             break;
         
@@ -84,12 +94,14 @@ void drawMaps_lvl1() {
 }
 
 void init_lvl1_startingRoom() {
+    arrowsON();
+
     draw_lvl1_startingRoom();
     setMapDimensions(512, 512);
-    setPlayerPos(232, 232);
+    setPlayerPos(spawnX, spawnY);
 
     // TEST
-    setArrowPos(UP, ROOM2, 120, 0);
+    setArrowPos(RIGHT, LEFT1, 385, 235);
 
     // initialize enemies (number, type, position)
     // enemy_manager.numBallers = 0;
@@ -114,7 +126,7 @@ void init_lvl1_leftRoom1() {
     setMapDimensions(256, 256);
     setPlayerPos(112, 240);
 
-    setArrowPos(UP, ROOM3, 120, 0);
+    setArrowPos(UP, LEFT2, 120, 0);
 
     
 }

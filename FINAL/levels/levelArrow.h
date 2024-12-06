@@ -27,6 +27,6 @@ void arrowsOFF();
 void setArrowPos(DIRECTION dir, ROOMS room, int x, int y);
 void drawArrow(ARROW_DATA* a);
 void checkArrowCollision(ARROW_DATA* a);
-void useArrow(ROOMS room);
+void useArrow(ROOMS room, ARROW_DATA* a);
 
 #endif

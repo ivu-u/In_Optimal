@@ -66,15 +66,25 @@ void checkArrowCollision(ARROW_DATA* a) {
     if (collision(a->x, a->y, 16, 16, player.x, player.y, player.width, player.height)) {
         a->overlappingPlayer = 1;
         if (BUTTON_PRESSED(BUTTON_B)) {
-            mgba_printf("pressed A on arrow");
-            useArrow(a->room);
+            useArrow(a->room, a);
         }
     } else { a->overlappingPlayer = 0; }
 }
 
 /// @brief when the player uses a level arrow, send them to the next room
-void useArrow(ROOMS room) {
+void useArrow(ROOMS room, ARROW_DATA* a) {
     currRoom = room;
+
+    // set the player pos based on what direction the arrow is
+    int x = 0;
+    int y = 0;
+    switch (a->direction) {
+        case UP: x = 242; y = 364; break;
+        case DOWN: x = 242; y = 112; break;
+        case LEFT: x = 388; y = 234; break;
+        case RIGHT: x = 94; y = 234; break;
+    }
+    
     // maybe code here for room transitions
-    enterRoom(room);
+    enterRoom(room, x, y);
 }

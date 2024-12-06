@@ -16,12 +16,11 @@ void gameOver();
 
 extern int MapWidth, MapHeight;
 
-#include "../gameBgs/pathwayBitmap.h"
+#include "../lvl1_Art/lvlBitmap.h"
 
 // TO-DO: make this scalable with levels
 inline unsigned char colorAt(int x, int y){
-    //return ((unsigned char *) pathwayBitmapBitmap)[OFFSET(x, y, MapWidth)];
-    return 1;
+    return ((unsigned char *) lvlBitmapBitmap)[OFFSET(x, y, MapWidth)];
 }
 
 #endif

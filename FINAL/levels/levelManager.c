@@ -38,11 +38,11 @@ void enterLevel(LEVEL newLevel) {
     }
 }
 
-void enterRoom(ROOMS room) {
+void enterRoom(ROOMS room, int x, int y) {
     arrowsOFF();
     switch(currLevel) {
         case LVL1:
-            lvl1_enterROOM(room);
+            lvl1_enterROOM(room, x, y);
             break;
     }
 }
@@ -51,7 +51,7 @@ void enterRoom(ROOMS room) {
 /// The level can choose if they want to do anything with that
 void allEnemiesCleared() {
     arrowsON();
-    if (currRoom == ROOM3) {
+    if (currRoom == LEFT2) {
         enterState(GS_WIN);
     }
 }
