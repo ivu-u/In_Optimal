@@ -13,5 +13,6 @@ void updateChargeBullet(BULLET* cb);
 void drawChargeBullet(BULLET* cb);
 void moveChargeBullet(BULLET* cb);
 void spawnChargeBullet(int x, int y);
+void chargeBullet();
 
 #endif

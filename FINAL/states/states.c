@@ -26,6 +26,7 @@ void runState() {
 
         case GS_INSTRUCT:
             updateInstructions();
+            break;
 
         case GS_PAUSE:
             updatePause();
@@ -38,6 +39,7 @@ void runState() {
         case GS_LOSE:
             updateLose();
             break;
+            
         case GS_WIN:
             updateWin();
             break;
@@ -64,9 +66,10 @@ void enterState(GameState newState) {
         case GS_INSTRUCT:
             initIntructions();
             state = GS_INSTRUCT;
+            break;
 
         case GS_PAUSE:
-            innitPause();
+            initPause();
             state = GS_PAUSE;
             break;
 

@@ -8,7 +8,7 @@
 #include "../menuScreens/pauseBG.h"
 
 
-void innitPause() {
+void initPause() {
     hideSprites();
     waitForVBlank();
     DMANow(3, shadowOAM, OAM, 128 * 4);

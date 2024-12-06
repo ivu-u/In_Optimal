@@ -6,6 +6,7 @@
 #define NUM_ROOMS 4
 
 void initLevel1();
+void update_lvl1();
 void lvl1_enterROOM(ROOMS room, int x, int y);
 void drawMaps_lvl1();
 
@@ -29,5 +30,7 @@ void init_lvl1_finalRoom();
 void draw_lvl1_finalRoom();
 
 void winLevel();
+
+void lvl1_drawScrollingBckg();
 
 #endif

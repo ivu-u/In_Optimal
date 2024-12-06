@@ -1,5 +1,6 @@
 #include "player.h"
 #include "playerAnim.h"
+#include "camera.h"
 
 #include "../playerAttacks/bulletManager.h"
 

@@ -22,7 +22,7 @@ void initCamera() {
     REG_BG1VOFF = vOff;
 }
 
- void updateCamera() {
+void updateCamera() {
     // setting camera based on new player position
     hOff = player.x - (SCREENWIDTH - player.width) / 2;
     vOff = player.y - (SCREENHEIGHT - player.height) / 2;

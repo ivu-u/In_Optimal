@@ -65,7 +65,7 @@ void drawArrow(ARROW_DATA* a) {
 void checkArrowCollision(ARROW_DATA* a) {
     if (collision(a->x, a->y, 16, 16, player.x, player.y, player.width, player.height)) {
         a->overlappingPlayer = 1;
-        if (BUTTON_PRESSED(BUTTON_B)) {
+        if (BUTTON_PRESSED(BUTTON_A)) {
             useArrow(a->room, a);
         }
     } else { a->overlappingPlayer = 0; }

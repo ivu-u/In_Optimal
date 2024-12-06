@@ -25,4 +25,4 @@ void init_lvl3_room1() {
     m_setBallerPos(100, 100);
 }
 
-void draw_lvl3_room1() { DMANow(3, &pathwayMap, &SCREENBLOCK[17], pathwayLen / 2); }
+void draw_lvl3_room1() {  }

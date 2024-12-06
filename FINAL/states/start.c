@@ -22,10 +22,10 @@ void initStart() {
 void updateStart() {
     rSeed++;
 
-    if (BUTTON_PRESSED(BUTTON_SELECT)) {
+    if (BUTTON_PRESSED(BUTTON_B)) {
         enterState(GS_INSTRUCT);
     }
-    if (BUTTON_PRESSED(BUTTON_START)) {
+    if (BUTTON_PRESSED(BUTTON_A)) {
         srand(rSeed);
         enterState(GS_GAME);
     }

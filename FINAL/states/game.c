@@ -52,8 +52,6 @@ void initGame() {
 
 /// @brief main game loop
 void updateGame() {
-    if (BUTTON_PRESSED(BUTTON_START)) { enterState(GS_PAUSE); }
-
     runLevel();
 
     // TO-DO - figure out if you can keep these here or not
@@ -66,6 +64,8 @@ void updateGame() {
 
     drawMovingBG();
     drawGui();
+
+    if (BUTTON_PRESSED(BUTTON_START)) { enterState(GS_PAUSE); }
 }
 
 void resumeGame() {
@@ -88,8 +88,8 @@ void setMapDimensions(int mapWidth, int mapHeight) {
 void drawMaps() {
 
     // red bG scroll
-    DMANow(3, &redBGTiles, &CHARBLOCK[0], redBGTilesLen / 2);
-    DMANow(3, &redBGMap, &SCREENBLOCK[16], redBGMapLen / 2);
+    // DMANow(3, &redBGTiles, &CHARBLOCK[0], redBGTilesLen / 2);
+    // DMANow(3, &redBGMap, &SCREENBLOCK[16], redBGMapLen / 2);
 
     // spritesheet
     DMANow(3, &spritesheetTiles, &CHARBLOCK[4], spritesheetTilesLen / 2);

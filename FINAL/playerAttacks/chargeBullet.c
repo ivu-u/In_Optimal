@@ -81,6 +81,5 @@ void spawnChargeBullet(int x, int y) {
 }
 
 void chargeBullet() {
-    mgba_printf("charge");
     currCharge += 1;
 }

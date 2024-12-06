@@ -21,21 +21,23 @@
 
 // locals
 int roomIsCleared[NUM_ROOMS];
-int spawnX = 240;   // initial spawn point
-int spawnY = 232;
+// int spawnX = 240;   // initial spawn point
+// int spawnY = 232;
 
 /// @brief Runs when you first enter level 1, only once
 void initLevel1() {
+    // bckg pal
+    DMANow(3, &lvl1_tilesetPal, BG_PALETTE, lvl1_tilesetPalLen / 2);
+
     // scrollingh bckg
     // DMANow(3, &lvl1BckgScrollTiles, &CHARBLOCK[0], lvl1BckgScrollTilesLen / 2);
-    // DMANow(3, &lvl1BckgScrollMap, &SCREENBLOCK[16], lvl1BckgScrollMapLen / 2);
+    // DMANow(3, &lvl1BckgScrollMap, &SCREENBLOCK[23], lvl1BckgScrollMapLen / 2);
 
     setMapDimensions(512, 512);
 
     currRoom = STARTROOM;
     DMANow(3, &lvl1_tilesetTiles, &CHARBLOCK[1], lvl1_tilesetTilesLen / 2);
-    DMANow(3, &lvl1_tilesetPal, BG_PALETTE, lvl1_tilesetPalLen / 2);
-    init_lvl1_startingRoom();
+    lvl1_enterROOM(STARTROOM, 240, 232);
 
     for (int i = 0; i < NUM_ROOMS; ++i) { roomIsCleared[i] = 0; }
 }
@@ -61,9 +63,6 @@ void update_lvl1() {
 }
 
 void lvl1_enterROOM(ROOMS room, int x, int y) {
-    spawnX = x;
-    spawnY = y;
-
     switch(room) {
         case STARTROOM:
             init_lvl1_startingRoom();
@@ -81,6 +80,7 @@ void lvl1_enterROOM(ROOMS room, int x, int y) {
             init_lvl1_finalRoom();
             break;
     }
+    setPlayerPos(x, y);
 }
 
 void drawMaps_lvl1() {
@@ -106,7 +106,7 @@ void drawMaps_lvl1() {
 void init_lvl1_startingRoom() {
     arrowsON();
     draw_lvl1_startingRoom();
-    setPlayerPos(spawnX, spawnY);
+    //setPlayerPos(spawnX, spawnY);
 
     // TEST
     setArrowPos(UP, FINAL, 243, 114);
@@ -122,7 +122,10 @@ void init_lvl1_startingRoom() {
     // m_setStalkerPos(100, 100);
 }
 
-void draw_lvl1_startingRoom() { DMANow(3, &lvl1_startingRoomMap ,&SCREENBLOCK[17], lvl1_startingRoomLen / 2); }
+void draw_lvl1_startingRoom() { 
+    lvl1_drawScrollingBckg();
+    DMANow(3, &lvl1_startingRoomMap ,&SCREENBLOCK[17], lvl1_startingRoomLen / 2); 
+}
 
 void update_lvl1_startingRoom() {
     // check if the room has been cleared or not
@@ -178,4 +181,9 @@ void init_lvl1_finalRoom() {
 void draw_lvl1_finalRoom() { DMANow(3, &lvl1_finalMap ,&SCREENBLOCK[17], lvl1_finalLen / 2);}
 
 void winLevel() { }
+
+void lvl1_drawScrollingBckg() {
+    DMANow(3, &lvl1BckgScrollTiles, &CHARBLOCK[0], lvl1BckgScrollTilesLen / 2);
+    DMANow(3, &lvl1BckgScrollMap, &SCREENBLOCK[16], lvl1BckgScrollMapLen / 2);
+}
  
