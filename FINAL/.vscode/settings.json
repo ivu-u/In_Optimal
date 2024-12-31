@@ -38,6 +38,7 @@
         "greentest.h": "c",
         "heavybullet.h": "c",
         "lvl1_final.h": "c",
-        "lvl1bckgscroll.h": "c"
+        "lvl1bckgscroll.h": "c",
+        "playermovement.h": "c"
     }
 }

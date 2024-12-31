@@ -2,7 +2,6 @@
 #define PLAYER_H
 
 #include "../helpers/gba.h"
-#include "../helpers/sprites.h"
 #include "../playerAttacks/bulletManager.h"
 
 typedef struct {
@@ -46,14 +45,10 @@ void initPlayer();
 void updatePlayer();
 void setPlayerPos(int x, int y);
 
-void playerMovement();
 void playerSkills();
-void playerDash();
 void playerTakeDamage(int dmg);
-void playerApplyRecoil(int direction, int recoilForce);
 
 void playerGetRandomSkill();
-void playerSwitchDirections(DIRECTION dir);
 void playerResetSkillTime(BULLET_TYPE type);
 void playerCalculateIFrames();
 void playerMakeInvulnerable();
