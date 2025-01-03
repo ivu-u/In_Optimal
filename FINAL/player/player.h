@@ -33,7 +33,7 @@ typedef struct {
 #define SWITCH_SKILL_TIME 2 * 60    // X seconds * 60
 #define IFRAME_AMOUNT 50
 
-#define P_NORMAL_SPEED 1
+#define P_NORMAL_SPEED 2
 #define P_DASH_SPEED 3
 #define P_DASH_DURATION 15
 #define P_DASH_COOLDOWN 30
