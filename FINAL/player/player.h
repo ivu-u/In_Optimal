@@ -2,7 +2,6 @@
 #define PLAYER_H
 
 #include "../helpers/gba.h"
-#include "../helpers/sprites.h"
 #include "../playerAttacks/bulletManager.h"
 
 typedef struct {
@@ -34,7 +33,7 @@ typedef struct {
 #define SWITCH_SKILL_TIME 2 * 60    // X seconds * 60
 #define IFRAME_AMOUNT 50
 
-#define P_NORMAL_SPEED 1
+#define P_NORMAL_SPEED 2
 #define P_DASH_SPEED 3
 #define P_DASH_DURATION 15
 #define P_DASH_COOLDOWN 30
@@ -46,14 +45,10 @@ void initPlayer();
 void updatePlayer();
 void setPlayerPos(int x, int y);
 
-void playerMovement();
 void playerSkills();
-void playerDash();
 void playerTakeDamage(int dmg);
-void playerApplyRecoil(int direction, int recoilForce);
 
 void playerGetRandomSkill();
-void playerSwitchDirections(DIRECTION dir);
 void playerResetSkillTime(BULLET_TYPE type);
 void playerCalculateIFrames();
 void playerMakeInvulnerable();
